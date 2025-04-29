@@ -26,7 +26,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 /**
  * Base class of tests with a transactional context.
  *
- * @author jtremeaux 
+ * @author jtremeaux
  */
 public abstract class BaseTransactionalTest extends BaseTest {
     @Before
