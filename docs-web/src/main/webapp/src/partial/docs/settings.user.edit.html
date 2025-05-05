@@ -4,6 +4,15 @@
   <h2 ng-show="isEdit()" translate="settings.user.edit.edit_user_title" translate-values="{ username: user.username }"></h2>
   <h2 ng-show="!isEdit()" translate="settings.user.edit.add_user_title"></h2>
 
+  <!-- ✅ 承认用户按钮 -->
+  <div class="form-group" ng-if="user.disabled">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="button" class="btn btn-success" ng-click="approveUser()">
+        <span class="fas fa-user-check"></span> 承认用户
+      </button>
+    </div>
+  </div>
+
   <form class="form-horizontal" name="editUserForm" novalidate autocomplete="off">
     <div class="form-group" ng-class="{ 'has-error': !editUserForm.userUsername.$valid && editUserForm.$dirty, success: editUserForm.userUsername.$valid }">
       <label class="col-sm-2 control-label" for="inputUserUsername">{{ 'settings.user.edit.username' | translate }}</label>
@@ -41,7 +50,7 @@
       <div class="col-sm-7">
         <span ng-repeat="group in user.groups">
           <a class="btn btn-default"
-            href="#/settings/group/edit/{{ group }}">{{ group }}</a>&nbsp;
+             href="#/settings/group/edit/{{ group }}">{{ group }}</a>&nbsp;
         </span>
       </div>
     </div>
@@ -62,7 +71,7 @@
     </div>
 
     <div class="form-group" ng-if="user.username != 'guest'"
-      ng-class="{ 'has-error': !editUserForm.userPassword.$valid && editUserForm.$dirty, success: editUserForm.userPassword.$valid }">
+         ng-class="{ 'has-error': !editUserForm.userPassword.$valid && editUserForm.$dirty, success: editUserForm.userPassword.$valid }">
       <label class="col-sm-2 control-label" for="inputUserPassword">{{ 'settings.user.edit.password' | translate }}</label>
       <div class="col-sm-7">
         <input type="password" style="display: none;"/><!-- Hack to disable autofill -->
@@ -78,7 +87,7 @@
     </div>
 
     <div class="form-group" ng-if="user.username != 'guest'"
-      ng-class="{ 'has-error': !editUserForm.passwordconfirm.$valid && editUserForm.$dirty, success: editUserForm.passwordconfirm.$valid }">
+         ng-class="{ 'has-error': !editUserForm.passwordconfirm.$valid && editUserForm.$dirty, success: editUserForm.passwordconfirm.$valid }">
       <label class="col-sm-2 control-label" for="inputPasswordConfirm">{{ 'settings.user.edit.password_confirm' | translate }}</label>
       <div class="col-sm-7">
         <input name="passwordconfirm" type="password" id="inputPasswordConfirm" ng-required="!isEdit()" class="form-control"
