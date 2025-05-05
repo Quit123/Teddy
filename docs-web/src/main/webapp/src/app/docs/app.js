@@ -364,6 +364,15 @@ angular.module('docs',
         }
       }
     })
+    .state('register', {
+    url: '/register',
+    views: {
+    'page': {
+        templateUrl: 'partial/docs/register.html',
+        controller: 'Register'
+    }
+    }
+    })
     .state('user', {
       url: '/user',
       abstract: true,

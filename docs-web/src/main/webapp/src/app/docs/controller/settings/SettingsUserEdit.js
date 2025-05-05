@@ -3,14 +3,14 @@
 /**
  * Settings user edition page controller.
  */
-angular.module('docs').controller('SettingsUserEdit', function($scope, $dialog, $state, $stateParams, Restangular, $translate) {
+angular.module('docs').controller('SettingsUserEdit', function($scope, $dialog, $state, $stateParams, Restangular, $translate, User) {
   /**
    * Returns true if in edit mode (false in add mode).
    */
   $scope.isEdit = function () {
     return $stateParams.username;
   };
-  
+
   /**
    * In edit mode, load the current user.
    */
@@ -30,7 +30,7 @@ angular.module('docs').controller('SettingsUserEdit', function($scope, $dialog, 
     var promise = null;
     var user = angular.copy($scope.user);
     user.storage_quota *= 1000000;
-    
+
     if ($scope.isEdit()) {
       promise = Restangular
         .one('user', $stateParams.username)
@@ -40,7 +40,7 @@ angular.module('docs').controller('SettingsUserEdit', function($scope, $dialog, 
         .one('user')
         .put(user);
     }
-    
+
     promise.then(function () {
       $scope.loadUsers();
       $state.go('settings.user');
@@ -51,6 +51,22 @@ angular.module('docs').controller('SettingsUserEdit', function($scope, $dialog, 
         var btns = [{result: 'ok', label: $translate.instant('ok'), cssClass: 'btn-primary'}];
         $dialog.messageBox(title, msg, btns);
       }
+    });
+  };
+
+  /**
+   * ✅ 承认用户（approveUser）
+   */
+  $scope.approveUser = function() {
+    var username = $scope.user.username;
+    if (!confirm("确定批准用户 " + username + " 吗？")) {
+      return;
+    }
+    User.admit(username).then(function() {
+      alert("用户 " + username + " 已激活！");
+      $state.go('settings.user');
+    }, function(error) {
+      alert("激活失败: " + (error.data.message || "请检查服务器日志"));
     });
   };
 

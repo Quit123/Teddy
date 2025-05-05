@@ -30,6 +30,20 @@ angular.module('docs').factory('User', function(Restangular) {
      */
     logout: function() {
       return Restangular.one('user').post('logout', {});
+    },
+
+    /**
+     * Register a new user.
+     */
+    register: function(user) {
+      return Restangular.one('user').post('register', user);
+    },
+
+    /**
+     * Admit a user.
+     */
+    admit: function(username) {
+      return Restangular.one('user', username).post('admit', {});
     }
-  }
+  };
 });
