@@ -34,7 +34,10 @@ angular.module('docs').controller('SettingsUser', function($scope, $state, Resta
       }).then(function(data) {
       // 添加 disabled 字段：如果 disableTimestamp 存在则为 true
         data.users.forEach(function(u) {
-          u.disabled = !!u.disableTimestamp; // ✅ 显式转换为布尔值字段
+          //u.disabled = !!u.disableTimestamp; // ✅ 显式转换为布尔值字段
+          if (u.disabled === undefined) {
+            u.disabled = !!u.disableTimestamp;  // 兼容老逻辑
+          }
         });
         $scope.users = data.users;
       });
