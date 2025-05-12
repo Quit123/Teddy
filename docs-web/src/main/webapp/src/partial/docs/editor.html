@@ -1,0 +1,67 @@
+<!--ng-controller="ImageEditor"-->
+
+<style>
+  body {
+    overflow: auto; /* ✅ 启用滚动 */
+    margin: 0;
+    padding: 0;
+  }
+
+  #image-wrapper {
+    transform-origin: center center;
+    transition: transform 0.2s ease;
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
+  #editor-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+
+<div class="container" style="position: relative;">
+    <h1 class="text-danger">Editor 页面已加载</h1>
+    <!-- 外层容器，控制缩放和滚动 -->
+    <div id="editor-container"
+         style="max-width: 100vw; max-height: 100vh; overflow: auto; display: flex; justify-content: center;">
+        <!-- 中间容器负责旋转 -->
+        <div id="image-rotator" style="display: inline-block; transition: transform 0.3s ease;">
+            <div id="image-wrapper" style="position: relative; display: inline-block;">
+                <img id="editor-img"
+                     ng-attr-src="../api/file/{{fileId}}/data?size=web"
+                     style="max-width: 100%; display: block;">
+                <canvas id="draw-layer"
+                        style="position:absolute; left:0; top:0; cursor:crosshair;"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ★ 工具栏 -->
+    <div id="editor-toolbar" style="position: fixed; right: 20px; top: 120px; display: flex; flex-direction: column; gap: 10px;">
+        <button class="btn btn-info" ng-click="enterCropMode()">✂️ 开始剪裁</button>
+        <button class="btn btn-default" ng-click="rotate(-90)">↺ 向左旋转</button>
+        <button class="btn btn-default" ng-click="rotate(90)">↻ 向右旋转</button>
+        <button class="btn btn-danger" ng-click="confirmCrop()">✅ 保存剪裁</button>
+<!--        <button class="btn btn-danger" ng-click="confirmRotation()">✅ 保存旋转&剪裁</button>-->
+        <button class="btn btn-default" ng-click="toggleSharpen()">✨ 锐化</button>
+        <button class="btn btn-default" ng-click="toggleDraw()">✏️ 画笔</button>
+        <button class="btn btn-warning" ng-click="undoDraw()">🗑️ 撤销</button>
+        <button class="btn btn-primary" ng-click="saveDraw()">💾 保存涂鸦</button>
+        <button class="btn btn-success mt-2" ng-click="cropAndUpload()">保存</button>
+    </div>
+</div>
+
+<!--<div class="container">-->
+<!--    <h1 class="text-danger">Editor 页面已加载</h1>-->
+
+<!--    <img id="editor-img"-->
+<!--         ng-attr-src="../api/file/{{fileId}}/data?size=web"-->
+<!--         style="max-width:100%;">-->
+
+<!--    <br/>-->
+<!--    <button class="btn btn-success" ng-click="cropAndUpload()">保存</button>-->
+<!--</div>-->
+
