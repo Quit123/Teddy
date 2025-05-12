@@ -20,8 +20,24 @@
       &nbsp;
     </button>
   </div>
-  
-  <div class="btn-group pull-right">
+
+  <div class="btn-group pull-right" ng-controller="FileViewToolbar">
+<!--  <div class="btn-group pull-right" ng-controller="ImageEditor">-->
+<!--    <button type="button" class="btn btn-default"-->
+<!--            uib-tooltip="编辑此图像" tooltip-append-to-body="true"-->
+<!--            ng-if="file.mimetype === 'image/png' || file.mimetype === 'image/jpeg'"-->
+<!--            ng-click="editImage()">-->
+<!--      <span class="fas fa-edit"></span>-->
+<!--    </button>-->
+
+    <!-- 编辑按钮：仅 PNG / JPEG 可见 -->
+    <button class="btn btn-default"
+            uib-tooltip="编辑此图像" tooltip-append-to-body="true"
+            ng-if="file.mimetype.startsWith('image/')"
+            ng-click="openEditor(file)">
+      <span class="fas fa-edit"></span>
+    </button>
+
     <button type="button" class="btn btn-default" uib-tooltip="Print this file" tooltip-append-to-body="true" ng-click="printFile()">
       <span class="fas fa-print"></span>
     </button>

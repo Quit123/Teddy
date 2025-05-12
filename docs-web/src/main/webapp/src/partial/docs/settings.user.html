@@ -23,8 +23,8 @@
         </td>
         <td>{{ user.create_date | date: dateFormat }}</td>
         <td>
-          <span ng-if="user.disabled" class="text-warning">待批准</span>
-          <span ng-if="!user.disabled">正常</span>
+          <span ng-if="user.disableTimestamp" class="text-warning">待批准</span>
+          <span ng-if="!user.disableTimestamp">正常</span>
         </td>
       </tr>
       </tbody>

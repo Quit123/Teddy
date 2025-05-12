@@ -140,6 +140,22 @@ public class FileResource extends BaseResource {
         } catch (Exception e) {
             throw new ServerException("FileError", "Error adding a file", e);
         }
+
+//        if (previousFileId != null && !previousFileId.isEmpty()) {
+//            // 表示这是已有文件的新版本上传
+//            File existingFile = fileService.findById(previousFileId);
+//            File newVersion = fileService.createNewVersion(
+//                    existingFile,
+//                    fileStream,
+//                    fileDetail.getFileName(),
+//                    (User) securityContext.getUserPrincipal()
+//            );
+//            return Response.ok(Json.createObjectBuilder()
+//                    .add("id", newVersion.getId())
+//                    .add("document_id", newVersion.getDocumentId())
+//                    .add("name", newVersion.getName())
+//                    .build()).build();
+//        }
     }
     
     /**
